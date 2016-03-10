@@ -11,13 +11,10 @@ namespace FileSplitter
         {
             if (args.Length < 1) return;
 
-            if (args.Length == 1)
-                Split(args[0]);
-            else
-                Split(args[0], int.Parse(args[1]));
+            Split(args[0], Properties.Settings.Default.MaxSizeInMegabyte);
         }
 
-        static void Split(string sourceFilePath, int maxSizeInMegabyte = 1024)
+        static void Split(string sourceFilePath, int maxSizeInMegabyte)
         {
             using (var source = File.OpenRead(sourceFilePath))
             using (var reader = new BinaryReader(source))
