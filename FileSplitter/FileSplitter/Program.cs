@@ -9,9 +9,21 @@ namespace FileSplitter
     {
         static void Main(string[] args)
         {
-            if (args.Length < 1) return;
+            if (args.Length < 1)
+            {
+                Console.WriteLine("Usage: FileSplitter <source-file-path>");
+                Console.WriteLine("Or, drag and drop the source file.");
+                return;
+            }
 
-            Split(args[0], Properties.Settings.Default.MaxSizeInMegabyte);
+            var sourceFilePath = args[0];
+            if (!File.Exists(sourceFilePath))
+            {
+                Console.WriteLine("The specified source file does not exist.");
+                return;
+            }
+
+            Split(sourceFilePath, Properties.Settings.Default.MaxSizeInMegabyte);
         }
 
         static void Split(string sourceFilePath, int maxSizeInMegabyte)
