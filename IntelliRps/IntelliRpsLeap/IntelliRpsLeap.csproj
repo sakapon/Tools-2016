@@ -171,6 +171,12 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IntelliRps\IntelliRps.csproj">
+      <Project>{04b69a04-d3f9-43e2-bb32-03a40080216d}</Project>
+      <Name>IntelliRps</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(ProjectDir)..\..\Lib\Leap 2.3.1\Leap.dll" "$(TargetDir)"
