@@ -7,12 +7,12 @@ namespace IntelliRps
     public class Game
     {
         string ShapeHistory = "";
-        Dictionary<string, EnumCountMap<Shape>> ShapeHistoryMap = GameRules.CreateHistoryKeys().ToDictionary(k => k, _ => new EnumCountMap<Shape>());
+        Dictionary<string, EnumCountMap<RpsShape>> ShapeHistoryMap = GameRules.CreateHistoryKeys().ToDictionary(k => k, _ => new EnumCountMap<RpsShape>());
 
         public List<MatchInfo> MatchHistory { get; } = new List<MatchInfo>();
         public EnumCountMap<MatchResult> MatchResultMap { get; } = new EnumCountMap<MatchResult>();
 
-        public Shape NextComputerShape()
+        public RpsShape NextComputerShape()
         {
             var probs = GetProbabilities();
 
@@ -33,7 +33,7 @@ namespace IntelliRps
             return GameRules.GetDefeatingShape(playerShape);
         }
 
-        public void AddMatchInfo(Shape playerShape, Shape computerShape)
+        public void AddMatchInfo(RpsShape playerShape, RpsShape computerShape)
         {
             var degrees = Enumerable.Range(0, GameRules.MaxHistoryDegree + 1)
                 .TakeWhile(d => ShapeHistory.Length >= d);
@@ -51,12 +51,12 @@ namespace IntelliRps
             MatchResultMap[match.PlayerResult] += 1;
         }
 
-        EnumProbabilityMap<Shape> GetProbabilities0()
+        EnumProbabilityMap<RpsShape> GetProbabilities0()
         {
             return ShapeHistoryMap[""].GetProbability();
         }
 
-        EnumProbabilityMap<Shape> GetProbabilities()
+        EnumProbabilityMap<RpsShape> GetProbabilities()
         {
             if (ShapeHistory.Length == 0) return GetProbabilities0();
 
@@ -66,22 +66,22 @@ namespace IntelliRps
                 .Select(k => ShapeHistoryMap[k].GetProbability())
                 .ToArray();
 
-            var ratio = EnumProbabilityMap<Shape>.EnumValues
+            var ratio = EnumProbabilityMap<RpsShape>.EnumValues
                 .Select(s => degreeProbs.Sum(r => r[s] * r[s]))
                 .ToArray();
-            return new EnumProbabilityMap<Shape>(ratio);
+            return new EnumProbabilityMap<RpsShape>(ratio);
         }
     }
 
     public class MatchInfo
     {
-        public Shape PlayerShape { get; }
-        public Shape ComputerShape { get; }
+        public RpsShape PlayerShape { get; }
+        public RpsShape ComputerShape { get; }
 
         public MatchResult PlayerResult => GameRules.GetResult(PlayerShape, ComputerShape);
         public MatchResult ComputerResult => GameRules.GetResult(ComputerShape, PlayerShape);
 
-        public MatchInfo(Shape playerShape, Shape computerShape)
+        public MatchInfo(RpsShape playerShape, RpsShape computerShape)
         {
             PlayerShape = playerShape;
             ComputerShape = computerShape;

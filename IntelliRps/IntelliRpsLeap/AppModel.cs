@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
+using IntelliRps;
 using Reactive.Bindings;
 
 namespace IntelliRpsLeap
@@ -11,7 +12,7 @@ namespace IntelliRpsLeap
         public LeapManager LeapManager { get; } = new LeapManager();
 
         public ReadOnlyReactiveProperty<int?> ExtendedFingersCount { get; }
-        public ReadOnlyReactiveProperty<Shape?> HandShape { get; }
+        public ReadOnlyReactiveProperty<RpsShape?> HandShape { get; }
 
         public AppModel()
         {
@@ -20,20 +21,13 @@ namespace IntelliRpsLeap
                 .Select(h => h.IsValid ? h.Fingers.Count(f => f.IsExtended) : default(int?))
                 .ToReadOnlyReactiveProperty();
             HandShape = ExtendedFingersCount
-                .Select(f => f.HasValue ? ToShape(f.Value) : default(Shape?))
+                .Select(f => f.HasValue ? ToShape(f.Value) : default(RpsShape?))
                 .ToReadOnlyReactiveProperty();
         }
 
-        static Shape ToShape(int fingers) =>
-            fingers < 2 ? Shape.Rock :
-            fingers < 4 ? Shape.Scissors :
-            Shape.Paper;
-    }
-
-    public enum Shape
-    {
-        Rock,
-        Paper,
-        Scissors,
+        static RpsShape ToShape(int fingers) =>
+            fingers < 2 ? RpsShape.Rock :
+            fingers < 4 ? RpsShape.Scissors :
+            RpsShape.Paper;
     }
 }

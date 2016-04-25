@@ -29,7 +29,7 @@ namespace IntelliRpsConsole
                         continue;
                 }
 
-                var playerShape = (Shape)(int.Parse(consoleKey.KeyChar.ToString()) - 1);
+                var playerShape = (RpsShape)(int.Parse(consoleKey.KeyChar.ToString()) - 1);
                 var computerShape = game.NextComputerShape();
                 game.AddMatchInfo(playerShape, computerShape);
 
@@ -39,15 +39,15 @@ namespace IntelliRpsConsole
             }
         }
 
-        static string ToString(Shape shape)
+        static string ToString(RpsShape shape)
         {
             switch (shape)
             {
-                case Shape.Rock:
+                case RpsShape.Rock:
                     return "Ｏ";
-                case Shape.Paper:
+                case RpsShape.Paper:
                     return "Ｗ";
-                case Shape.Scissors:
+                case RpsShape.Scissors:
                     return "Ｖ";
                 default:
                     throw new InvalidOperationException();

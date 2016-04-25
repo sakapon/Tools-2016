@@ -8,9 +8,9 @@ namespace IntelliRps
     {
         public const int MaxHistoryDegree = 2;
 
-        public static Shape GetDefeatingShape(Shape opponentShape) => (Shape)(((int)opponentShape + 1) % 3);
+        public static RpsShape GetDefeatingShape(RpsShape opponentShape) => (RpsShape)(((int)opponentShape + 1) % 3);
 
-        public static MatchResult GetResult(Shape myShape, Shape opponentShape) => (MatchResult)((opponentShape - myShape + 4) % 3);
+        public static MatchResult GetResult(RpsShape myShape, RpsShape opponentShape) => (MatchResult)((opponentShape - myShape + 4) % 3);
 
         public static IEnumerable<string> CreateHistoryKeys() => Enumerable.Range(0, MaxHistoryDegree + 1).SelectMany(CreateHistoryKeys);
 
@@ -35,7 +35,7 @@ namespace IntelliRps
         }
     }
 
-    public enum Shape
+    public enum RpsShape
     {
         Rock,
         Paper,
