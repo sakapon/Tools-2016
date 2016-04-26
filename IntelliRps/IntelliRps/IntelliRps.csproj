@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\History.cs" />
+    <Compile Include="Core\QueueCollection.cs" />
     <Compile Include="EnumMap.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameRules.cs" />
