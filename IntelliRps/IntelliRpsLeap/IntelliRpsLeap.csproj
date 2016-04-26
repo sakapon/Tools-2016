@@ -186,6 +186,24 @@
       <Link>LeapCSharp.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="..\Contents\Images\Paper-1.png">
+      <Link>Images\Paper-1.png</Link>
+    </Resource>
+    <Resource Include="..\Contents\Images\Paper-2.png">
+      <Link>Images\Paper-2.png</Link>
+    </Resource>
+    <Resource Include="..\Contents\Images\Rock-1.png">
+      <Link>Images\Rock-1.png</Link>
+    </Resource>
+    <Resource Include="..\Contents\Images\Rock-2.png">
+      <Link>Images\Rock-2.png</Link>
+    </Resource>
+    <Resource Include="..\Contents\Images\Scissors-1.png">
+      <Link>Images\Scissors-1.png</Link>
+    </Resource>
+    <Resource Include="..\Contents\Images\Scissors-2.png">
+      <Link>Images\Scissors-2.png</Link>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
