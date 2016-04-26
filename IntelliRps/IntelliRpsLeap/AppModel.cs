@@ -9,23 +9,15 @@ namespace IntelliRpsLeap
 {
     public class AppModel
     {
-        public LeapManager LeapManager { get; } = new LeapManager();
-
-        public ReadOnlyReactiveProperty<int?> ExtendedFingersCount { get; }
-        public ReadOnlyReactiveProperty<RpsShape?> HandShape { get; }
+        public HandTracker HandTracker { get; } = new HandTracker();
 
         public ReactiveProperty<Game> Game { get; } = new ReactiveProperty<Game>();
 
+        public ReactiveProperty<RpsShape?> PlayerHandShape { get; } = new ReactiveProperty<RpsShape?>();
+        public ReactiveProperty<RpsShape?> ComputerHandShape { get; } = new ReactiveProperty<RpsShape?>();
+
         public AppModel()
         {
-            ExtendedFingersCount = LeapManager.FrameArrived
-                .Select(f => f.Hands.Frontmost)
-                .Select(h => h.IsValid ? h.Fingers.Count(f => f.IsExtended) : default(int?))
-                .ToReadOnlyReactiveProperty();
-            HandShape = ExtendedFingersCount
-                .Select(f => f.HasValue ? ToShape(f.Value) : default(RpsShape?))
-                .ToReadOnlyReactiveProperty();
-
             Game.Value = new Game();
         }
 
@@ -37,10 +29,5 @@ namespace IntelliRpsLeap
         public void StartMatch()
         {
         }
-
-        static RpsShape ToShape(int fingers) =>
-            fingers < 2 ? RpsShape.Rock :
-            fingers < 4 ? RpsShape.Scissors :
-            RpsShape.Paper;
     }
 }

@@ -126,6 +126,7 @@
     </Compile>
     <Compile Include="AppModel.cs" />
     <Compile Include="FuncConverter.cs" />
+    <Compile Include="HandTracker.cs" />
     <Compile Include="LeapManager.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">

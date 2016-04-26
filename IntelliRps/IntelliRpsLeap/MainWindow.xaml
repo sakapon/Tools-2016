@@ -14,7 +14,7 @@
     </Window.DataContext>
     <Viewbox>
         <Grid Width="1800" Height="1200" Margin="30">
-            <Image Source="{Binding AppModel.HandShape.Value, Converter={StaticResource ToImagePathConverter}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="160" Height="160"/>
+            <Image Source="{Binding AppModel.HandTracker.HandShape.Value, Converter={StaticResource ToImagePathConverter}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="160" Height="160"/>
         </Grid>
     </Viewbox>
 </Window>
