@@ -9,7 +9,8 @@ namespace IntelliRpsLeap
 {
     public class MainViewModel
     {
-        public static readonly Func<RpsShape?, string> ToImagePath = s => s.HasValue ? $"Images/{s}-1.png" : null;
+        public static readonly Func<RpsShape?, string> ToImagePath1 = s => s.HasValue ? $"Images/{s}-1.png" : null;
+        public static readonly Func<RpsShape?, string> ToImagePath2 = s => s.HasValue ? $"Images/{s}-2.png" : null;
 
         public AppModel AppModel { get; } = new AppModel();
 

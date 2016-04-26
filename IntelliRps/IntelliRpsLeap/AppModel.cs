@@ -13,12 +13,20 @@ namespace IntelliRpsLeap
 
         public ReactiveProperty<Game> Game { get; } = new ReactiveProperty<Game>();
 
-        public ReactiveProperty<RpsShape?> PlayerHandShape { get; } = new ReactiveProperty<RpsShape?>();
-        public ReactiveProperty<RpsShape?> ComputerHandShape { get; } = new ReactiveProperty<RpsShape?>();
+        public ReactiveProperty<RpsShape?> ComputerShape { get; } = new ReactiveProperty<RpsShape?>();
 
         public AppModel()
         {
             Game.Value = new Game();
+
+            HandTracker.PlayerShape
+                .Where(s => s.HasValue)
+                .Subscribe(s =>
+                {
+                    var computerShape = Game.Value.NextComputerShape();
+                    ComputerShape.Value = computerShape;
+                    Game.Value.AddMatchInfo(s.Value, computerShape);
+                });
         }
 
         public void StartGame()

@@ -9,15 +9,17 @@
         mc:Ignorable="d"
         Title="Intelli-RPS" Height="800" Width="1200" WindowState="Maximized" FontSize="32">
     <Window.Resources>
-        <local:FuncConverter x:Key="ToImagePathConverter" ToFunc="{x:Static local:MainViewModel.ToImagePath}"/>
+        <local:FuncConverter x:Key="ToImagePath1Converter" ToFunc="{x:Static local:MainViewModel.ToImagePath1}"/>
+        <local:FuncConverter x:Key="ToImagePath2Converter" ToFunc="{x:Static local:MainViewModel.ToImagePath2}"/>
     </Window.Resources>
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>
     <Viewbox>
         <Grid Width="1800" Height="1200" Margin="30">
-            <Image Source="{Binding AppModel.HandTracker.HandShape.Value, Converter={StaticResource ToImagePathConverter}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="160" Height="160"/>
-            <Image Source="{Binding AppModel.HandTracker.PlayerShape.Value, Converter={StaticResource ToImagePathConverter}}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="360" Height="360" Margin="0,0,300,100"/>
+            <Image Source="{Binding AppModel.HandTracker.HandShape.Value, Converter={StaticResource ToImagePath1Converter}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="160" Height="160"/>
+            <Image Source="{Binding AppModel.HandTracker.PlayerShape.Value, Converter={StaticResource ToImagePath1Converter}}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="360" Height="360" Margin="0,0,300,100"/>
+            <Image Source="{Binding AppModel.ComputerShape.Value, Converter={StaticResource ToImagePath2Converter}}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="360" Height="360" Margin="0,0,300,600"/>
             <Button Content="Start Match" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="240" Height="80">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
