@@ -7,14 +7,14 @@
         mc:Ignorable="d"
         Title="Intelli-RPS" Height="800" Width="1200" WindowState="Maximized" FontSize="32">
     <Window.Resources>
-        <local:FuncConverter x:Key="FuncConverter" ToFunc="{x:Static local:MainViewModel.ToImagePath}"/>
+        <local:FuncConverter x:Key="ToImagePathConverter" ToFunc="{x:Static local:MainViewModel.ToImagePath}"/>
     </Window.Resources>
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>
     <Viewbox>
         <Grid Width="1800" Height="1200" Margin="30">
-            <Image HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="{Binding AppModel.HandShape.Value, Converter={StaticResource FuncConverter}, Mode=OneWay}" Width="409" Height="409" Stretch="None"/>
+            <Image Source="{Binding AppModel.HandShape.Value, Converter={StaticResource ToImagePathConverter}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="160" Height="160"/>
         </Grid>
     </Viewbox>
 </Window>
