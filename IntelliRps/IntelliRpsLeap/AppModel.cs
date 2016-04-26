@@ -15,6 +15,7 @@ namespace IntelliRpsLeap
 
         public ReactiveProperty<RpsShape?> ComputerShape { get; } = new ReactiveProperty<RpsShape?>();
         public ReactiveProperty<Scoreline> Scoreline { get; } = new ReactiveProperty<Scoreline>();
+        public ReactiveProperty<bool> IsMatchActive { get; } = new ReactiveProperty<bool>();
 
         public AppModel()
         {
@@ -25,8 +26,10 @@ namespace IntelliRpsLeap
                 .Subscribe(s =>
                 {
                     var computerShape = Game.Value.NextComputerShape();
-                    ComputerShape.Value = computerShape;
                     Game.Value.AddMatchInfo(s.Value, computerShape);
+
+                    ComputerShape.Value = computerShape;
+                    IsMatchActive.Value = false;
                     Scoreline.Value = new Scoreline(Game.Value.MatchResultMap);
                 });
         }

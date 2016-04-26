@@ -63,17 +63,20 @@
                 <TextBlock Text="{Binding Losses}" Style="{DynamicResource ScoreTextBlockStyle}" Foreground="#FFCC0000"/>
                 <TextBlock Text="Losses" Style="{DynamicResource ScoreUnitTextBlockStyle}"/>
             </StackPanel>
+            <Image Source="{Binding AppModel.HandTracker.HandShape.Value, Converter={StaticResource ToImagePath1Converter}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="120" Height="120"/>
+            <Canvas Visibility="{Binding MatchShapeVisibility.Value, Mode=OneWay}">
+                <Image Source="{Binding AppModel.ComputerShape.Value, Converter={StaticResource ToImagePath2Converter}}" Width="360" Height="360" Canvas.Left="1200" Canvas.Top="250"/>
+                <Image Source="{Binding AppModel.HandTracker.PlayerShape.Value, Converter={StaticResource ToImagePath1Converter}}" Width="360" Height="360" Canvas.Left="1200" Canvas.Top="700"/>
+            </Canvas>
             <Canvas x:Name="PrimingCanvas">
                 <TextBlock x:Name="JanText" Text="じゃん" Style="{DynamicResource PrimingTextBlockStyle}" Canvas.Left="500" Canvas.Top="300" Visibility="Hidden"/>
                 <TextBlock x:Name="KenText" Text="けん" Style="{DynamicResource PrimingTextBlockStyle}" Canvas.Left="1000" Canvas.Top="550" Visibility="Hidden"/>
                 <TextBlock x:Name="PonText" Text="ぽん" Style="{DynamicResource PrimingTextBlockStyle}" Canvas.Left="600" Canvas.Top="800" Visibility="Hidden"/>
             </Canvas>
-            <Image Source="{Binding AppModel.HandTracker.HandShape.Value, Converter={StaticResource ToImagePath1Converter}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="120" Height="120"/>
-            <Image Source="{Binding AppModel.HandTracker.PlayerShape.Value, Converter={StaticResource ToImagePath1Converter}}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="360" Height="360" Margin="0,0,300,100"/>
-            <Image Source="{Binding AppModel.ComputerShape.Value, Converter={StaticResource ToImagePath2Converter}}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="360" Height="360" Margin="0,0,300,600"/>
             <Button Content="Start Match" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="240" Height="80">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
+                        <ei:ChangePropertyAction TargetObject="{Binding AppModel.IsMatchActive, Mode=OneWay}" PropertyName="Value" Value="True"/>
                         <ei:ControlStoryboardAction Storyboard="{StaticResource PrimingStoryboard1}"/>
                     </i:EventTrigger>
                     <ei:StoryboardCompletedTrigger Storyboard="{StaticResource PrimingStoryboard1}">

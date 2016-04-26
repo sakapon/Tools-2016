@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Windows;
 using IntelliRps;
 using Reactive.Bindings;
 
@@ -14,8 +15,13 @@ namespace IntelliRpsLeap
 
         public AppModel AppModel { get; } = new AppModel();
 
+        public ReadOnlyReactiveProperty<Visibility> MatchShapeVisibility { get; }
+
         public MainViewModel()
         {
+            MatchShapeVisibility = AppModel.IsMatchActive
+                .Select(b => b ? Visibility.Hidden : Visibility.Visible)
+                .ToReadOnlyReactiveProperty();
         }
     }
 }
