@@ -17,6 +17,14 @@
     <Viewbox>
         <Grid Width="1800" Height="1200" Margin="30">
             <Image Source="{Binding AppModel.HandTracker.HandShape.Value, Converter={StaticResource ToImagePathConverter}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="160" Height="160"/>
+            <Image Source="{Binding AppModel.HandTracker.PlayerShape.Value, Converter={StaticResource ToImagePathConverter}}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="360" Height="360" Margin="0,0,300,100"/>
+            <Button Content="Start Match" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="240" Height="80">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <ei:CallMethodAction TargetObject="{Binding AppModel.HandTracker, Mode=OneWay}" MethodName="StartPlayerShapeTracking"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
         </Grid>
     </Viewbox>
 </Window>
