@@ -14,6 +14,7 @@ namespace IntelliRpsLeap
         public ReactiveProperty<Game> Game { get; } = new ReactiveProperty<Game>();
 
         public ReactiveProperty<RpsShape?> ComputerShape { get; } = new ReactiveProperty<RpsShape?>();
+        public ReactiveProperty<Scoreline> Scoreline { get; } = new ReactiveProperty<Scoreline>();
 
         public AppModel()
         {
@@ -26,6 +27,7 @@ namespace IntelliRpsLeap
                     var computerShape = Game.Value.NextComputerShape();
                     ComputerShape.Value = computerShape;
                     Game.Value.AddMatchInfo(s.Value, computerShape);
+                    Scoreline.Value = new Scoreline(Game.Value.MatchResultMap);
                 });
         }
 
@@ -36,6 +38,20 @@ namespace IntelliRpsLeap
 
         public void StartMatch()
         {
+        }
+    }
+
+    public struct Scoreline
+    {
+        public int Wins { get; }
+        public int Ties { get; }
+        public int Losses { get; }
+
+        public Scoreline(EnumCountMap<MatchResult> matchResultMap)
+        {
+            Wins = matchResultMap[MatchResult.Win];
+            Ties = matchResultMap[MatchResult.Tie];
+            Losses = matchResultMap[MatchResult.Loss];
         }
     }
 }

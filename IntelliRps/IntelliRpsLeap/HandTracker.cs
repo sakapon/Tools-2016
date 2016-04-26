@@ -14,7 +14,7 @@ namespace IntelliRpsLeap
         public ReadOnlyReactiveProperty<int?> ExtendedFingersCount { get; }
         public ReadOnlyReactiveProperty<RpsShape?> HandShape { get; }
 
-        public ReactiveProperty<RpsShape?> PlayerShape { get; } = new ReactiveProperty<RpsShape?>();
+        public ReactiveProperty<RpsShape?> PlayerShape { get; } = new ReactiveProperty<RpsShape?>(mode: ReactivePropertyMode.RaiseLatestValueOnSubscribe);
 
         public HandTracker()
         {
