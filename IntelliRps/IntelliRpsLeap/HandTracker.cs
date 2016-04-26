@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using IntelliRps;
-using IntelliRps.Core;
 using Reactive.Bindings;
 
 namespace IntelliRpsLeap
@@ -15,6 +14,8 @@ namespace IntelliRpsLeap
         public ReadOnlyReactiveProperty<int?> ExtendedFingersCount { get; }
         public ReadOnlyReactiveProperty<RpsShape?> HandShape { get; }
 
+        public ReactiveProperty<RpsShape?> PlayerShape { get; } = new ReactiveProperty<RpsShape?>();
+
         public HandTracker()
         {
             ExtendedFingersCount = LeapManager.FrameArrived
@@ -24,6 +25,15 @@ namespace IntelliRpsLeap
             HandShape = ExtendedFingersCount
                 .Select(f => f.HasValue ? ToShape(f.Value) : default(RpsShape?))
                 .ToReadOnlyReactiveProperty();
+        }
+
+        public void StartPlayerShapeTracking()
+        {
+            Observable.Repeat(HandShape.Value, 1)
+                .Merge(HandShape)
+                .Throttle(TimeSpan.FromSeconds(0.2))
+                .Take(1)
+                .Subscribe(s => PlayerShape.Value = s);
         }
 
         static RpsShape ToShape(int fingers) =>
