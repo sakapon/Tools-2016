@@ -14,6 +14,8 @@ namespace IntelliRpsLeap
         public ReadOnlyReactiveProperty<int?> ExtendedFingersCount { get; }
         public ReadOnlyReactiveProperty<RpsShape?> HandShape { get; }
 
+        public ReactiveProperty<Game> Game { get; } = new ReactiveProperty<Game>();
+
         public AppModel()
         {
             ExtendedFingersCount = LeapManager.FrameArrived
@@ -23,6 +25,17 @@ namespace IntelliRpsLeap
             HandShape = ExtendedFingersCount
                 .Select(f => f.HasValue ? ToShape(f.Value) : default(RpsShape?))
                 .ToReadOnlyReactiveProperty();
+
+            Game.Value = new Game();
+        }
+
+        public void StartGame()
+        {
+            Game.Value = new Game();
+        }
+
+        public void StartMatch()
+        {
         }
 
         static RpsShape ToShape(int fingers) =>

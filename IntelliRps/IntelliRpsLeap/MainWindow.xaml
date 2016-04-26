@@ -7,9 +7,11 @@
         mc:Ignorable="d"
         Title="Intelli-RPS" Height="350" Width="525" WindowState="Maximized" FontSize="32">
     <Window.DataContext>
-        <local:AppModel/>
+        <local:MainViewModel/>
     </Window.DataContext>
-    <Grid>
-        <TextBlock Text="{Binding HandShape.Value}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    </Grid>
+    <Viewbox>
+        <Grid Width="1800" Height="1200" Margin="30">
+            <Image HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="{Binding HandShapeImagePath.Value, Mode=OneWay}" Width="409" Height="409" Stretch="None"/>
+        </Grid>
+    </Viewbox>
 </Window>
