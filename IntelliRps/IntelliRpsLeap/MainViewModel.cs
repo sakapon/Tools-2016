@@ -12,16 +12,9 @@ namespace IntelliRpsLeap
     {
         public static readonly Func<RpsShape?, string> ToImagePath1 = s => s.HasValue ? $"Images/{s}-1.png" : null;
         public static readonly Func<RpsShape?, string> ToImagePath2 = s => s.HasValue ? $"Images/{s}-2.png" : null;
+        public static readonly Func<bool, Visibility> ToVisible = b => b ? Visibility.Visible : Visibility.Hidden;
+        public static readonly Func<bool, Visibility> ToHidden = b => b ? Visibility.Hidden : Visibility.Visible;
 
         public AppModel AppModel { get; } = new AppModel();
-
-        public ReadOnlyReactiveProperty<Visibility> MatchShapeVisibility { get; }
-
-        public MainViewModel()
-        {
-            MatchShapeVisibility = AppModel.IsMatchActive
-                .Select(b => b ? Visibility.Hidden : Visibility.Visible)
-                .ToReadOnlyReactiveProperty();
-        }
     }
 }

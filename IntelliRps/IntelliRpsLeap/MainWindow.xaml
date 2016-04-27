@@ -11,6 +11,8 @@
     <Window.Resources>
         <local:FuncConverter x:Key="ToImagePath1Converter" ToFunc="{x:Static local:MainViewModel.ToImagePath1}"/>
         <local:FuncConverter x:Key="ToImagePath2Converter" ToFunc="{x:Static local:MainViewModel.ToImagePath2}"/>
+        <local:FuncConverter x:Key="ToVisibleConverter" ToFunc="{x:Static local:MainViewModel.ToVisible}"/>
+        <local:FuncConverter x:Key="ToHiddenConverter" ToFunc="{x:Static local:MainViewModel.ToHidden}"/>
         <Style x:Key="ScoreTextBlockStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="Width" Value="220"/>
             <Setter Property="FontSize" Value="100"/>
@@ -64,7 +66,7 @@
                 <TextBlock Text="Losses" Style="{DynamicResource ScoreUnitTextBlockStyle}"/>
             </StackPanel>
             <Image Source="{Binding AppModel.HandTracker.HandShape.Value, Converter={StaticResource ToImagePath1Converter}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="120" Height="120"/>
-            <Canvas Visibility="{Binding MatchShapeVisibility.Value, Mode=OneWay}">
+            <Canvas Visibility="{Binding AppModel.IsMatchActive.Value, Converter={StaticResource ToHiddenConverter}}">
                 <Image Source="{Binding AppModel.ComputerShape.Value, Converter={StaticResource ToImagePath2Converter}}" Width="360" Height="360" Canvas.Left="1200" Canvas.Top="250"/>
                 <Image Source="{Binding AppModel.HandTracker.PlayerShape.Value, Converter={StaticResource ToImagePath1Converter}}" Width="360" Height="360" Canvas.Left="1200" Canvas.Top="700"/>
             </Canvas>
