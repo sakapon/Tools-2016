@@ -66,7 +66,7 @@
                 <TextBlock Text="Losses" Style="{DynamicResource ScoreUnitTextBlockStyle}"/>
             </StackPanel>
             <Image Source="{Binding AppModel.HandTracker.HandShape.Value, Converter={StaticResource ToImagePath1Converter}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="120" Height="120"/>
-            <Canvas Visibility="{Binding AppModel.IsMatchActive.Value, Converter={StaticResource ToHiddenConverter}}">
+            <Canvas x:Name="MatchShapesCanvas" Visibility="{Binding AppModel.IsMatchActive.Value, Converter={StaticResource ToHiddenConverter}}">
                 <Image Source="{Binding AppModel.ComputerShape.Value, Converter={StaticResource ToImagePath2Converter}}" Width="360" Height="360" Canvas.Left="1200" Canvas.Top="250"/>
                 <Image Source="{Binding AppModel.HandTracker.PlayerShape.Value, Converter={StaticResource ToImagePath1Converter}}" Width="360" Height="360" Canvas.Left="1200" Canvas.Top="700"/>
             </Canvas>
@@ -75,11 +75,8 @@
                 <TextBlock x:Name="KenText" Text="けん" Style="{DynamicResource PrimingTextBlockStyle}" Canvas.Left="1000" Canvas.Top="550" Visibility="Hidden"/>
                 <TextBlock x:Name="PonText" Text="ぽん" Style="{DynamicResource PrimingTextBlockStyle}" Canvas.Left="600" Canvas.Top="800" Visibility="Hidden"/>
             </Canvas>
-            <Button Content="Start" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="240" Height="80" Visibility="{Binding AppModel.IsGameConsecutive.Value, Converter={StaticResource ToHiddenConverter}}">
+            <Grid x:Name="CommandsGrid" HorizontalAlignment="Left" VerticalAlignment="Bottom">
                 <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <ei:CallMethodAction TargetObject="{Binding AppModel, Mode=OneWay}" MethodName="StartConsecutiveGame"/>
-                    </i:EventTrigger>
                     <ei:PropertyChangedTrigger Binding="{Binding AppModel.IsMatchActive.Value}">
                         <i:Interaction.Behaviors>
                             <ei:ConditionBehavior>
@@ -95,14 +92,21 @@
                         <ei:ControlStoryboardAction Storyboard="{StaticResource PrimingStoryboard2}"/>
                     </ei:StoryboardCompletedTrigger>
                 </i:Interaction.Triggers>
-            </Button>
-            <Button Content="Stop" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="240" Height="80" Visibility="{Binding AppModel.IsGameConsecutive.Value, Converter={StaticResource ToVisibleConverter}}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <ei:CallMethodAction TargetObject="{Binding AppModel, Mode=OneWay}" MethodName="StopConsecutiveGame"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Button>
+                <Button Content="Start" Width="240" Height="80" Visibility="{Binding AppModel.IsGameConsecutive.Value, Converter={StaticResource ToHiddenConverter}}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <ei:CallMethodAction TargetObject="{Binding AppModel, Mode=OneWay}" MethodName="StartConsecutiveGame"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <Button Content="Stop" Width="240" Height="80" Visibility="{Binding AppModel.IsGameConsecutive.Value, Converter={StaticResource ToVisibleConverter}}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <ei:CallMethodAction TargetObject="{Binding AppModel, Mode=OneWay}" MethodName="StopConsecutiveGame"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+            </Grid>
         </Grid>
     </Viewbox>
 </Window>
