@@ -75,7 +75,7 @@
                 <TextBlock x:Name="KenText" Text="けん" Style="{DynamicResource PrimingTextBlockStyle}" Canvas.Left="1000" Canvas.Top="550" Visibility="Hidden"/>
                 <TextBlock x:Name="PonText" Text="ぽん" Style="{DynamicResource PrimingTextBlockStyle}" Canvas.Left="600" Canvas.Top="800" Visibility="Hidden"/>
             </Canvas>
-            <Button Content="Start" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="240" Height="80">
+            <Button Content="Start" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="240" Height="80" Visibility="{Binding AppModel.IsGameConsecutive.Value, Converter={StaticResource ToHiddenConverter}}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <ei:CallMethodAction TargetObject="{Binding AppModel, Mode=OneWay}" MethodName="StartConsecutiveGame"/>
@@ -94,6 +94,13 @@
                         <ei:CallMethodAction TargetObject="{Binding AppModel.HandTracker, Mode=OneWay}" MethodName="StartPlayerShapeTracking"/>
                         <ei:ControlStoryboardAction Storyboard="{StaticResource PrimingStoryboard2}"/>
                     </ei:StoryboardCompletedTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <Button Content="Stop" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="240" Height="80" Visibility="{Binding AppModel.IsGameConsecutive.Value, Converter={StaticResource ToVisibleConverter}}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <ei:CallMethodAction TargetObject="{Binding AppModel, Mode=OneWay}" MethodName="StopConsecutiveGame"/>
+                    </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
         </Grid>

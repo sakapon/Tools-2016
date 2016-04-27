@@ -48,21 +48,19 @@ namespace IntelliRpsLeap
 
         void SetNextMatchTimer()
         {
-            Observable.Repeat(false, 1)
-                .Delay(TimeSpan.FromSeconds(0.5))
+            Observable.Timer(TimeSpan.FromSeconds(0.5))
                 .Subscribe(_ => IsMatchActive.Value = true);
         }
 
         public void StartConsecutiveGame()
         {
-            //Game.Value = new Game();
-
             IsGameConsecutive.Value = true;
             IsMatchActive.Value = true;
         }
 
         public void StopConsecutiveGame()
         {
+            IsGameConsecutive.Value = false;
         }
     }
 
