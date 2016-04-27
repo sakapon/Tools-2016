@@ -43,11 +43,12 @@
             </ObjectAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PrimingCanvas">
                 <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.8"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="PrimingStoryboard2">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PrimingCanvas">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
@@ -67,8 +68,8 @@
             </StackPanel>
             <Image Source="{Binding AppModel.HandTracker.HandShape.Value, Converter={StaticResource ToImagePath1Converter}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="120" Height="120"/>
             <Canvas x:Name="MatchShapesCanvas" Visibility="{Binding AppModel.IsMatchActive.Value, Converter={StaticResource ToHiddenConverter}}">
-                <Image Source="{Binding AppModel.ComputerShape.Value, Converter={StaticResource ToImagePath2Converter}}" Width="360" Height="360" Canvas.Left="1200" Canvas.Top="250"/>
-                <Image Source="{Binding AppModel.HandTracker.PlayerShape.Value, Converter={StaticResource ToImagePath1Converter}}" Width="360" Height="360" Canvas.Left="1200" Canvas.Top="700"/>
+                <Image Source="{Binding AppModel.ComputerShape.Value, Converter={StaticResource ToImagePath2Converter}}" Width="360" Height="360" Canvas.Left="1100" Canvas.Top="250"/>
+                <Image Source="{Binding AppModel.HandTracker.PlayerShape.Value, Converter={StaticResource ToImagePath1Converter}}" Width="360" Height="360" Canvas.Left="1100" Canvas.Top="700"/>
             </Canvas>
             <Canvas x:Name="PrimingCanvas">
                 <TextBlock x:Name="JanText" Text="じゃん" Style="{DynamicResource PrimingTextBlockStyle}" Canvas.Left="500" Canvas.Top="300" Visibility="Hidden"/>
