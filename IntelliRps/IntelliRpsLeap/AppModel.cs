@@ -15,6 +15,7 @@ namespace IntelliRpsLeap
 
         public ReactiveProperty<RpsShape?> ComputerShape { get; } = new ReactiveProperty<RpsShape?>();
         public ReactiveProperty<Scoreline> Scoreline { get; } = new ReactiveProperty<Scoreline>();
+        public ReactiveProperty<bool> IsGameConsecutive { get; } = new ReactiveProperty<bool>();
         public ReactiveProperty<bool> IsMatchActive { get; } = new ReactiveProperty<bool>();
 
         public AppModel()
@@ -23,7 +24,7 @@ namespace IntelliRpsLeap
 
             HandTracker.PlayerShape
                 .Where(s => s.HasValue)
-                .Subscribe(s =>
+                .Do(s =>
                 {
                     var computerShape = Game.Value.NextComputerShape();
                     Game.Value.AddMatchInfo(s.Value, computerShape);
@@ -31,15 +32,36 @@ namespace IntelliRpsLeap
                     ComputerShape.Value = computerShape;
                     IsMatchActive.Value = false;
                     Scoreline.Value = new Scoreline(Game.Value.MatchResultMap);
-                });
+                })
+                .Where(_ => IsGameConsecutive.Value)
+                .Subscribe(s => SetNextMatchTimer());
+            HandTracker.PlayerShape
+                .Where(s => !s.HasValue)
+                .Do(s =>
+                {
+                    ComputerShape.Value = null;
+                    IsMatchActive.Value = false;
+                })
+                .Where(_ => IsGameConsecutive.Value)
+                .Subscribe(s => SetNextMatchTimer());
         }
 
-        public void StartGame()
+        void SetNextMatchTimer()
         {
-            Game.Value = new Game();
+            Observable.Repeat(false, 1)
+                .Delay(TimeSpan.FromSeconds(0.5))
+                .Subscribe(_ => IsMatchActive.Value = true);
         }
 
-        public void StartMatch()
+        public void StartConsecutiveGame()
+        {
+            //Game.Value = new Game();
+
+            IsGameConsecutive.Value = true;
+            IsMatchActive.Value = true;
+        }
+
+        public void StopConsecutiveGame()
         {
         }
     }
