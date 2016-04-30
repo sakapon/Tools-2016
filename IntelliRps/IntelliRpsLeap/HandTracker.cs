@@ -27,7 +27,7 @@ namespace IntelliRpsLeap
                 .ToReadOnlyReactiveProperty();
         }
 
-        public void StartPlayerShapeTracking()
+        public void TrackPlayerShape()
         {
             Observable.Repeat(HandShape.Value, 1)
                 .Merge(HandShape)

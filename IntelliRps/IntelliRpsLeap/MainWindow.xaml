@@ -89,7 +89,7 @@
                         <ei:ControlStoryboardAction Storyboard="{StaticResource PrimingStoryboard1}"/>
                     </ei:PropertyChangedTrigger>
                     <ei:StoryboardCompletedTrigger Storyboard="{StaticResource PrimingStoryboard1}">
-                        <ei:CallMethodAction TargetObject="{Binding AppModel.HandTracker, Mode=OneWay}" MethodName="StartPlayerShapeTracking"/>
+                        <ei:CallMethodAction TargetObject="{Binding AppModel, Mode=OneWay}" MethodName="StartJudgment"/>
                         <ei:ControlStoryboardAction Storyboard="{StaticResource PrimingStoryboard2}"/>
                     </ei:StoryboardCompletedTrigger>
                 </i:Interaction.Triggers>

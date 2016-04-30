@@ -58,6 +58,11 @@ namespace IntelliRpsLeap
             IsMatchActive.Value = true;
         }
 
+        public void StartJudgment()
+        {
+            HandTracker.TrackPlayerShape();
+        }
+
         public void StopConsecutiveGame()
         {
             IsGameConsecutive.Value = false;
