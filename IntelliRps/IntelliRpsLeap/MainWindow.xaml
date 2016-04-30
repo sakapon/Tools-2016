@@ -13,6 +13,7 @@
         <local:FuncConverter x:Key="ToImagePath2Converter" ToFunc="{x:Static local:MainViewModel.ToImagePath2}"/>
         <local:FuncConverter x:Key="ToVisibleConverter" ToFunc="{x:Static local:MainViewModel.ToVisible}"/>
         <local:FuncConverter x:Key="ToHiddenConverter" ToFunc="{x:Static local:MainViewModel.ToHidden}"/>
+        <local:FuncConverter x:Key="ToMatchResultColorConverter" ToFunc="{x:Static local:MainViewModel.ToMatchResultColor}"/>
         <Style x:Key="ScoreTextBlockStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="Width" Value="220"/>
             <Setter Property="FontSize" Value="100"/>
@@ -52,13 +53,24 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <DataTemplate x:Key="MatchDataTemplate">
+            <StackPanel>
+                <Rectangle Fill="{Binding ComputerResult, Converter={StaticResource ToMatchResultColorConverter}, Mode=OneWay}" Width="80" Height="10"/>
+                <Image Source="{Binding ComputerShape, Converter={StaticResource ToImagePath2Converter}, Mode=OneWay}" Width="100" Height="100" Margin="12"/>
+                <Image Source="{Binding PlayerShape, Converter={StaticResource ToImagePath1Converter}, Mode=OneWay}" Width="100" Height="100" Margin="12"/>
+                <Rectangle Fill="{Binding PlayerResult, Converter={StaticResource ToMatchResultColorConverter}, Mode=OneWay}" Width="80" Height="10"/>
+            </StackPanel>
+        </DataTemplate>
+        <ItemsPanelTemplate x:Key="MatchesPanelTemplate">
+            <StackPanel Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
     </Window.Resources>
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>
     <Viewbox>
         <Grid Width="1800" Height="1200" Margin="30">
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal" DataContext="{Binding AppModel.Scoreline.Value}" Margin="0,20">
+            <StackPanel x:Name="ScorePanel" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal" DataContext="{Binding AppModel.Scoreline.Value}" Margin="0,20">
                 <TextBlock Text="{Binding Wins}" Style="{DynamicResource ScoreTextBlockStyle}" Foreground="#FF009900"/>
                 <TextBlock Text="Wins" Style="{DynamicResource ScoreUnitTextBlockStyle}"/>
                 <TextBlock Text="{Binding Ties}" Style="{DynamicResource ScoreTextBlockStyle}" Foreground="#FFFFBB00"/>
@@ -66,6 +78,9 @@
                 <TextBlock Text="{Binding Losses}" Style="{DynamicResource ScoreTextBlockStyle}" Foreground="#FFCC0000"/>
                 <TextBlock Text="Losses" Style="{DynamicResource ScoreUnitTextBlockStyle}"/>
             </StackPanel>
+            <Grid Width="900" Height="810" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,250,0,0">
+                <ItemsControl ItemsSource="{Binding AppModel.Matches}" ItemTemplate="{DynamicResource MatchDataTemplate}" ItemsPanel="{DynamicResource MatchesPanelTemplate}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            </Grid>
             <Image Source="{Binding AppModel.HandTracker.HandShape.Value, Converter={StaticResource ToImagePath1Converter}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="120" Height="120"/>
             <Canvas x:Name="MatchShapesCanvas" Visibility="{Binding AppModel.IsMatchActive.Value, Converter={StaticResource ToHiddenConverter}}">
                 <Image Source="{Binding AppModel.ComputerShape.Value, Converter={StaticResource ToImagePath2Converter}}" Width="360" Height="360" Canvas.Left="1100" Canvas.Top="250"/>

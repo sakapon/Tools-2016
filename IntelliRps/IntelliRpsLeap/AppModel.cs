@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
 using IntelliRps;
@@ -17,6 +18,7 @@ namespace IntelliRpsLeap
         public ReactiveProperty<Scoreline> Scoreline { get; } = new ReactiveProperty<Scoreline>();
         public ReactiveProperty<bool> IsGameConsecutive { get; } = new ReactiveProperty<bool>();
         public ReactiveProperty<bool> IsMatchActive { get; } = new ReactiveProperty<bool>();
+        public ObservableCollection<MatchInfo> Matches { get; } = new ObservableCollection<MatchInfo>();
 
         public AppModel()
         {
@@ -32,9 +34,10 @@ namespace IntelliRpsLeap
                     ComputerShape.Value = computerShape;
                     IsMatchActive.Value = false;
                     Scoreline.Value = new Scoreline(Game.Value.MatchResultMap);
+                    System.Windows.Application.Current.Dispatcher.InvokeAsync(() => Matches.Add(Game.Value.MatchHistory.Last()));
                 })
                 .Where(_ => IsGameConsecutive.Value)
-                .Subscribe(s => SetNextMatchTimer());
+                .Subscribe(_ => SetNextMatchTimer());
             HandTracker.PlayerShape
                 .Where(s => !s.HasValue)
                 .Do(s =>
@@ -43,7 +46,7 @@ namespace IntelliRpsLeap
                     IsMatchActive.Value = false;
                 })
                 .Where(_ => IsGameConsecutive.Value)
-                .Subscribe(s => SetNextMatchTimer());
+                .Subscribe(_ => SetNextMatchTimer());
         }
 
         void SetNextMatchTimer()

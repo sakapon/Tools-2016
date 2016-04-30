@@ -14,6 +14,10 @@ namespace IntelliRpsLeap
         public static readonly Func<RpsShape?, string> ToImagePath2 = s => s.HasValue ? $"Images/{s}-2.png" : null;
         public static readonly Func<bool, Visibility> ToVisible = b => b ? Visibility.Visible : Visibility.Hidden;
         public static readonly Func<bool, Visibility> ToHidden = b => b ? Visibility.Hidden : Visibility.Visible;
+        public static readonly Func<MatchResult, string> ToMatchResultColor = r =>
+            r == MatchResult.Win ? "#FF009900" :
+            r == MatchResult.Tie ? "#FFFFBB00" :
+            "#FFCC0000";
 
         public AppModel AppModel { get; } = new AppModel();
     }
