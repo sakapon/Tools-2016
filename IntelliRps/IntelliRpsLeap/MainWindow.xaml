@@ -82,7 +82,11 @@
                 <Grid Width="900" HorizontalAlignment="Left">
                     <ItemsControl ItemsSource="{Binding AppModel.Matches}" ItemTemplate="{DynamicResource MatchDataTemplate}" ItemsPanel="{DynamicResource MatchesPanelTemplate}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 </Grid>
-                <Grid x:Name="MatchShapesPanel" Visibility="{Binding AppModel.IsMatchActive.Value, Converter={StaticResource ToHiddenConverter}}" Margin="1100,0,0,0" HorizontalAlignment="Left">
+                <Grid HorizontalAlignment="Left" Margin="100,150,0,150">
+                    <TextBlock Text="COM" FontSize="60" FontFamily="Courier New" FontWeight="Bold" VerticalAlignment="Top"/>
+                    <TextBlock Text="YOU" FontSize="60" FontFamily="Courier New" FontWeight="Bold" VerticalAlignment="Bottom"/>
+                </Grid>
+                <Grid x:Name="MatchShapesPanel" Visibility="{Binding AppModel.IsMatchActive.Value, Converter={StaticResource ToHiddenConverter}}" HorizontalAlignment="Left" Margin="1100,0,0,0">
                     <Image Source="{Binding AppModel.ComputerShape.Value, Converter={StaticResource ToImagePath2Converter}}" Width="360" Height="360" VerticalAlignment="Top"/>
                     <Image Source="{Binding AppModel.HandTracker.PlayerShape.Value, Converter={StaticResource ToImagePath1Converter}}" Width="360" Height="360" VerticalAlignment="Bottom"/>
                 </Grid>
