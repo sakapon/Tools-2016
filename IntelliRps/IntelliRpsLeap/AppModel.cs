@@ -18,7 +18,7 @@ namespace IntelliRpsLeap
         public ReactiveProperty<Scoreline> Scoreline { get; } = new ReactiveProperty<Scoreline>();
         public ReactiveProperty<bool> IsGameConsecutive { get; } = new ReactiveProperty<bool>();
         public ReactiveProperty<bool> IsMatchActive { get; } = new ReactiveProperty<bool>();
-        public ObservableCollection<MatchInfo> Matches { get; } = new ObservableCollection<MatchInfo>();
+        public ReactiveCollection<MatchInfo> Matches { get; } = new ReactiveCollection<MatchInfo>();
 
         public AppModel()
         {
@@ -34,7 +34,7 @@ namespace IntelliRpsLeap
                     ComputerShape.Value = computerShape;
                     IsMatchActive.Value = false;
                     Scoreline.Value = new Scoreline(Game.Value.MatchResultMap);
-                    System.Windows.Application.Current.Dispatcher.InvokeAsync(() => Matches.Add(Game.Value.MatchHistory.Last()));
+                    Matches.AddOnScheduler(Game.Value.MatchHistory.Last());
                 })
                 .Where(_ => IsGameConsecutive.Value)
                 .Subscribe(_ => SetNextMatchTimer());
