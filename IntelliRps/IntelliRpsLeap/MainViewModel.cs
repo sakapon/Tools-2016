@@ -20,5 +20,15 @@ namespace IntelliRpsLeap
             "#FFCC0000";
 
         public AppModel AppModel { get; } = new AppModel();
+
+        public ReactiveProperty<double> MatchesListWidth { get; } = new ReactiveProperty<double>();
+        public ReactiveProperty<double> MatchesListX { get; } = new ReactiveProperty<double>();
+
+        public MainViewModel()
+        {
+            MatchesListWidth
+                .Where(width => width + MatchesListX.Value > 900)
+                .Subscribe(_ => MatchesListX.Value -= 200);
+        }
     }
 }

@@ -80,7 +80,18 @@
             </StackPanel>
             <Grid Margin="0,250,0,150">
                 <Canvas Width="840" Height="268" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0">
-                    <ItemsControl x:Name="MatchesList" ItemsSource="{Binding AppModel.Matches}" ItemTemplate="{DynamicResource MatchDataTemplate}" ItemsPanel="{DynamicResource MatchesPanelTemplate}"/>
+                    <ItemsControl x:Name="MatchesList" ItemsSource="{Binding AppModel.Matches}" ItemTemplate="{DynamicResource MatchDataTemplate}" ItemsPanel="{DynamicResource MatchesPanelTemplate}" RenderTransformOrigin="0.5,0.5">
+                        <ItemsControl.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform X="{Binding MatchesListX.Value}"/>
+                            </TransformGroup>
+                        </ItemsControl.RenderTransform>
+                        <i:Interaction.Triggers>
+                            <ei:PropertyChangedTrigger Binding="{Binding ActualWidth, ElementName=MatchesList}">
+                                <ei:ChangePropertyAction TargetObject="{Binding MatchesListWidth, Mode=OneWay}" PropertyName="Value" Value="{Binding ActualWidth, ElementName=MatchesList}"/>
+                            </ei:PropertyChangedTrigger>
+                        </i:Interaction.Triggers>
+                    </ItemsControl>
                 </Canvas>
                 <Grid HorizontalAlignment="Left" Margin="100,150,0,150">
                     <TextBlock Text="COM" FontSize="60" FontFamily="Courier New" FontWeight="Bold" VerticalAlignment="Top"/>
