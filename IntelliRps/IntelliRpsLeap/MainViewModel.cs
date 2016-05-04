@@ -27,8 +27,24 @@ namespace IntelliRpsLeap
         public MainViewModel()
         {
             MatchesListWidth
-                .Where(width => width + MatchesListX.Value > 900)
-                .Subscribe(_ => MatchesListX.Value -= 200);
+                .Where(width => width + MatchesListX.Value > 800)
+                .Subscribe(_ => ScrollMatchesList());
         }
+
+        void ScrollMatchesList()
+        {
+            var renderingCount = NextRenderingCount();
+            var d = NextXDelta() / renderingCount;
+
+            Observable.Timer(NextScrollDelay(), RenderingPeriod)
+                .Take(renderingCount)
+                .Subscribe(_ => MatchesListX.Value -= d);
+        }
+
+        static readonly TimeSpan RenderingPeriod = TimeSpan.FromSeconds(0.015);
+        static readonly Random Random = new Random();
+        static double NextXDelta() => Random.Next(150, 250);
+        static int NextRenderingCount() => Random.Next(20, 50);
+        static TimeSpan NextScrollDelay() => TimeSpan.FromMilliseconds(Random.Next(100, 500));
     }
 }
