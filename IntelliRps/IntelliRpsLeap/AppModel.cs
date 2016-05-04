@@ -23,6 +23,12 @@ namespace IntelliRpsLeap
         public AppModel()
         {
             Game.Value = new Game();
+            Game.Subscribe(g =>
+            {
+                Scoreline.Value = new Scoreline(g.MatchResultMap);
+                Matches.ClearOnScheduler();
+                Matches.AddRangeOnScheduler(g.MatchHistory);
+            });
 
             HandTracker.PlayerShape
                 .Where(s => s.HasValue)
@@ -69,6 +75,13 @@ namespace IntelliRpsLeap
         public void StopConsecutiveGame()
         {
             IsGameConsecutive.Value = false;
+        }
+
+        public void ResetGame()
+        {
+            StopConsecutiveGame();
+
+            Game.Value = new Game();
         }
     }
 

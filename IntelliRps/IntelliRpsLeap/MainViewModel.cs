@@ -27,8 +27,11 @@ namespace IntelliRpsLeap
         public MainViewModel()
         {
             MatchesListWidth
-                .Where(width => width + MatchesListX.Value > 800)
+                .Where(width => width + MatchesListX.Value > 800.0)
                 .Subscribe(_ => ScrollMatchesList());
+            MatchesListWidth
+                .Where(width => width <= 800.0)
+                .Subscribe(_ => MatchesListX.Value = 0.0);
         }
 
         void ScrollMatchesList()
