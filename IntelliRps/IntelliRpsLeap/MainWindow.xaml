@@ -78,18 +78,20 @@
                 <TextBlock Text="{Binding Losses}" Style="{DynamicResource ScoreTextBlockStyle}" Foreground="#FFCC0000"/>
                 <TextBlock Text="Losses" Style="{DynamicResource ScoreUnitTextBlockStyle}"/>
             </StackPanel>
-            <Grid Width="900" Height="810" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,250,0,0">
-                <ItemsControl ItemsSource="{Binding AppModel.Matches}" ItemTemplate="{DynamicResource MatchDataTemplate}" ItemsPanel="{DynamicResource MatchesPanelTemplate}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Grid Margin="0,250,0,150">
+                <Grid Width="900" HorizontalAlignment="Left">
+                    <ItemsControl ItemsSource="{Binding AppModel.Matches}" ItemTemplate="{DynamicResource MatchDataTemplate}" ItemsPanel="{DynamicResource MatchesPanelTemplate}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid x:Name="MatchShapesPanel" Visibility="{Binding AppModel.IsMatchActive.Value, Converter={StaticResource ToHiddenConverter}}" Margin="1100,0,0,0" HorizontalAlignment="Left">
+                    <Image Source="{Binding AppModel.ComputerShape.Value, Converter={StaticResource ToImagePath2Converter}}" Width="360" Height="360" VerticalAlignment="Top"/>
+                    <Image Source="{Binding AppModel.HandTracker.PlayerShape.Value, Converter={StaticResource ToImagePath1Converter}}" Width="360" Height="360" VerticalAlignment="Bottom"/>
+                </Grid>
             </Grid>
             <Image Source="{Binding AppModel.HandTracker.HandShape.Value, Converter={StaticResource ToImagePath1Converter}, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="120" Height="120"/>
-            <Canvas x:Name="MatchShapesCanvas" Visibility="{Binding AppModel.IsMatchActive.Value, Converter={StaticResource ToHiddenConverter}}">
-                <Image Source="{Binding AppModel.ComputerShape.Value, Converter={StaticResource ToImagePath2Converter}}" Width="360" Height="360" Canvas.Left="1100" Canvas.Top="250"/>
-                <Image Source="{Binding AppModel.HandTracker.PlayerShape.Value, Converter={StaticResource ToImagePath1Converter}}" Width="360" Height="360" Canvas.Left="1100" Canvas.Top="700"/>
-            </Canvas>
             <Canvas x:Name="PrimingCanvas">
-                <TextBlock x:Name="JanText" Text="じゃん" Style="{DynamicResource PrimingTextBlockStyle}" Canvas.Left="500" Canvas.Top="300" Visibility="Hidden"/>
-                <TextBlock x:Name="KenText" Text="けん" Style="{DynamicResource PrimingTextBlockStyle}" Canvas.Left="1000" Canvas.Top="550" Visibility="Hidden"/>
-                <TextBlock x:Name="PonText" Text="ぽん" Style="{DynamicResource PrimingTextBlockStyle}" Canvas.Left="600" Canvas.Top="800" Visibility="Hidden"/>
+                <TextBlock x:Name="JanText" Text="じゃん" Style="{DynamicResource PrimingTextBlockStyle}" Canvas.Left="1000" Canvas.Top="250" Visibility="Hidden"/>
+                <TextBlock x:Name="KenText" Text="けん" Style="{DynamicResource PrimingTextBlockStyle}" Canvas.Left="1200" Canvas.Top="550" Visibility="Hidden"/>
+                <TextBlock x:Name="PonText" Text="ぽん" Style="{DynamicResource PrimingTextBlockStyle}" Canvas.Left="1000" Canvas.Top="850" Visibility="Hidden"/>
             </Canvas>
             <Grid x:Name="CommandsGrid" HorizontalAlignment="Left" VerticalAlignment="Bottom">
                 <i:Interaction.Triggers>
