@@ -79,9 +79,7 @@
                 <TextBlock Text="Losses" Style="{DynamicResource ScoreUnitTextBlockStyle}"/>
             </StackPanel>
             <Grid Margin="0,250,0,150">
-                <Grid Width="900" HorizontalAlignment="Left">
-                    <ItemsControl ItemsSource="{Binding AppModel.Matches}" ItemTemplate="{DynamicResource MatchDataTemplate}" ItemsPanel="{DynamicResource MatchesPanelTemplate}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                </Grid>
+                <ItemsControl x:Name="MatchesList" ItemsSource="{Binding AppModel.Matches}" ItemTemplate="{DynamicResource MatchDataTemplate}" ItemsPanel="{DynamicResource MatchesPanelTemplate}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="840" Margin="80,0,0,0"/>
                 <Grid HorizontalAlignment="Left" Margin="100,150,0,150">
                     <TextBlock Text="COM" FontSize="60" FontFamily="Courier New" FontWeight="Bold" VerticalAlignment="Top"/>
                     <TextBlock Text="YOU" FontSize="60" FontFamily="Courier New" FontWeight="Bold" VerticalAlignment="Bottom"/>
