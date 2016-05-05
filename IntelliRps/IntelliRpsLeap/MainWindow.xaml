@@ -64,6 +64,15 @@
         <ItemsPanelTemplate x:Key="MatchesPanelTemplate">
             <StackPanel Orientation="Horizontal"/>
         </ItemsPanelTemplate>
+        <Style x:Key="ButtonTextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Background" Value="#FF3333AA"/>
+            <Setter Property="Foreground" Value="#FFF8F8F8"/>
+            <Setter Property="Width" Value="240"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="18"/>
+            <Setter Property="Margin" Value="12"/>
+        </Style>
     </Window.Resources>
     <Window.DataContext>
         <local:MainViewModel/>
@@ -126,28 +135,28 @@
                             <ei:ControlStoryboardAction Storyboard="{StaticResource PrimingStoryboard2}"/>
                         </ei:StoryboardCompletedTrigger>
                     </i:Interaction.Triggers>
-                    <Button Content="Start" Width="240" Height="80" Visibility="{Binding AppModel.IsGameConsecutive.Value, Converter={StaticResource ToHiddenConverter}}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <ei:CallMethodAction TargetObject="{Binding AppModel, Mode=OneWay}" MethodName="StartConsecutiveGame"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button Content="Stop" Width="240" Height="80" Visibility="{Binding AppModel.IsGameConsecutive.Value, Converter={StaticResource ToVisibleConverter}}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <ei:CallMethodAction TargetObject="{Binding AppModel, Mode=OneWay}" MethodName="StopConsecutiveGame"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
+                    <TextBlock Text="Start" Style="{DynamicResource ButtonTextBlockStyle}" Visibility="{Binding AppModel.IsGameConsecutive.Value, Converter={StaticResource ToHiddenConverter}}">
+                    	<i:Interaction.Triggers>
+                    		<i:EventTrigger EventName="MouseLeftButtonDown">
+                    			<ei:CallMethodAction TargetObject="{Binding AppModel, Mode=OneWay}" MethodName="StartConsecutiveGame"/>
+                    		</i:EventTrigger>
+                    	</i:Interaction.Triggers>
+                    </TextBlock>
+                    <TextBlock Text="Stop" Style="{DynamicResource ButtonTextBlockStyle}" Visibility="{Binding AppModel.IsGameConsecutive.Value, Converter={StaticResource ToVisibleConverter}}">
+                    	<i:Interaction.Triggers>
+                    		<i:EventTrigger EventName="MouseLeftButtonDown">
+                    			<ei:CallMethodAction TargetObject="{Binding AppModel, Mode=OneWay}" MethodName="StopConsecutiveGame"/>
+                    		</i:EventTrigger>
+                    	</i:Interaction.Triggers>
+                    </TextBlock>
                 </Grid>
-                <Button Content="Reset" Width="240" Height="80">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <ei:CallMethodAction TargetObject="{Binding AppModel, Mode=OneWay}" MethodName="ResetGame"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Button>
+                <TextBlock Text="Reset" Style="{DynamicResource ButtonTextBlockStyle}">
+                	<i:Interaction.Triggers>
+                		<i:EventTrigger EventName="MouseLeftButtonDown">
+                			<ei:CallMethodAction TargetObject="{Binding AppModel, Mode=OneWay}" MethodName="ResetGame"/>
+                		</i:EventTrigger>
+                	</i:Interaction.Triggers>
+                </TextBlock>
             </StackPanel>
         </Grid>
     </Viewbox>
