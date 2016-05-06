@@ -79,12 +79,12 @@
     </Window.DataContext>
     <Viewbox>
         <Grid Width="1800" Height="1200" Margin="30">
-            <StackPanel x:Name="ScorePanel" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal" DataContext="{Binding AppModel.Scoreline.Value}" Margin="0,20">
-                <TextBlock Text="{Binding Wins}" Style="{DynamicResource ScoreTextBlockStyle}" Foreground="#FF009900"/>
+            <StackPanel x:Name="ScorePanel" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal" Margin="0,20">
+                <TextBlock Text="{Binding AppModel.Scoreline.Value.Wins}" Style="{DynamicResource ScoreTextBlockStyle}" Foreground="{Binding MatchResultTypes[0], Converter={StaticResource ToMatchResultColorConverter}}"/>
                 <TextBlock Text="Wins" Style="{DynamicResource ScoreUnitTextBlockStyle}"/>
-                <TextBlock Text="{Binding Ties}" Style="{DynamicResource ScoreTextBlockStyle}" Foreground="#FFFFBB00"/>
+                <TextBlock Text="{Binding AppModel.Scoreline.Value.Ties}" Style="{DynamicResource ScoreTextBlockStyle}" Foreground="{Binding MatchResultTypes[1], Converter={StaticResource ToMatchResultColorConverter}}"/>
                 <TextBlock Text="Ties" Style="{DynamicResource ScoreUnitTextBlockStyle}"/>
-                <TextBlock Text="{Binding Losses}" Style="{DynamicResource ScoreTextBlockStyle}" Foreground="#FFCC0000"/>
+                <TextBlock Text="{Binding AppModel.Scoreline.Value.Losses}" Style="{DynamicResource ScoreTextBlockStyle}" Foreground="{Binding MatchResultTypes[2], Converter={StaticResource ToMatchResultColorConverter}}"/>
                 <TextBlock Text="Losses" Style="{DynamicResource ScoreUnitTextBlockStyle}"/>
             </StackPanel>
             <Grid Margin="0,250,0,150">

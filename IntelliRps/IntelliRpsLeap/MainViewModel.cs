@@ -21,6 +21,8 @@ namespace IntelliRpsLeap
 
         public AppModel AppModel { get; } = new AppModel();
 
+        public MatchResult[] MatchResultTypes { get; } = (MatchResult[])Enum.GetValues(typeof(MatchResult));
+
         public ReactiveProperty<double> MatchesListWidth { get; } = new ReactiveProperty<double>();
         public ReactiveProperty<double> MatchesListX { get; } = new ReactiveProperty<double>();
 
