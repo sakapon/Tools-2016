@@ -11,6 +11,7 @@ namespace IntelliRpsLeap
     public class AppModel
     {
         public HandTracker HandTracker { get; } = new HandTracker();
+        public WavesPlayer WavesPlayer { get; }
 
         public ReactiveProperty<Game> Game { get; } = new ReactiveProperty<Game>();
 
@@ -20,8 +21,14 @@ namespace IntelliRpsLeap
         public ReactiveProperty<bool> IsMatchActive { get; } = new ReactiveProperty<bool>();
         public ReactiveCollection<MatchInfo> Matches { get; } = new ReactiveCollection<MatchInfo>();
 
+        static readonly string[] Priming = new[] { "Jan", "Ken", "Pon" };
+
         public AppModel()
         {
+            var sounds = Priming.ToDictionary(n => n, n => $@"Sounds\{n}.wav");
+            WavesPlayer = new WavesPlayer(sounds);
+            WavesPlayer.LoadAsync();
+
             Game.Value = new Game();
             Game.Subscribe(g =>
             {
@@ -53,12 +60,33 @@ namespace IntelliRpsLeap
                 })
                 .Where(_ => IsGameConsecutive.Value)
                 .Subscribe(_ => SetNextMatchTimer());
+
+            IsMatchActive
+                .Where(b => b)
+                .Subscribe(_ => SetPrimingSounds());
         }
 
         void SetNextMatchTimer()
         {
             Observable.Timer(TimeSpan.FromSeconds(0.5))
                 .Subscribe(_ => IsMatchActive.Value = true);
+        }
+
+        void SetPrimingSounds0()
+        {
+            Observable.Timer(TimeSpan.FromSeconds(0.1), TimeSpan.FromSeconds(0.4))
+                .Take(3)
+                .Subscribe(i => WavesPlayer.Play(Priming[i]));
+        }
+
+        void SetPrimingSounds()
+        {
+            Observable.Timer(TimeSpan.FromSeconds(0.03))
+                .Subscribe(i => WavesPlayer.Play(Priming[0]));
+            Observable.Timer(TimeSpan.FromSeconds(0.55))
+                .Subscribe(i => WavesPlayer.Play(Priming[1]));
+            Observable.Timer(TimeSpan.FromSeconds(0.92))
+                .Subscribe(i => WavesPlayer.Play(Priming[2]));
         }
 
         public void StartConsecutiveGame()
