@@ -26,6 +26,12 @@ namespace InkStrokes
         const string Dir_Images = "Images";
         const string Dir_Data = "Data";
 
+        static Lazy<Matrix> TransformToDevice { get; } = new Lazy<Matrix>(() =>
+        {
+            var source = PresentationSource.FromVisual(Application.Current.MainWindow);
+            return source.CompositionTarget.TransformToDevice;
+        });
+
         public MainWindow()
         {
             InitializeComponent();
@@ -76,7 +82,10 @@ namespace InkStrokes
             string.Join(StrokeDelimiter.ToString(), strokes.Select(ToString));
 
         static string ToString(Stroke stroke) =>
-            string.Join(PointDelimiter.ToString(), stroke.StylusPoints.Select(ToString));
+            string.Join(PointDelimiter.ToString(), stroke.StylusPoints.Select(p => ((Point)p) * TransformToDevice.Value).Select(ToString));
+
+        static string ToString(Point p) =>
+            $"{p.X:F3}{ElementDelimiter}{p.Y:F3}";
 
         static string ToString(StylusPoint p) =>
             $"{p.X:F3}{ElementDelimiter}{p.Y:F3}";
