@@ -85,7 +85,7 @@ namespace InkStrokes
             string.Join(PointDelimiter.ToString(), stroke.StylusPoints.Select(p => ((Point)p) * TransformToDevice.Value).Select(ToString));
 
         static string ToString(Point p) =>
-            $"{p.X:F3}{ElementDelimiter}{p.Y:F3}";
+            $"{p.X:F0}{ElementDelimiter}{p.Y:F0}";
 
         static string ToString(StylusPoint p) =>
             $"{p.X:F3}{ElementDelimiter}{p.Y:F3}";
