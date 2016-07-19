@@ -74,15 +74,15 @@ namespace InkStrokes
         static string CreateFileName() =>
             $"{DateTime.Now:yyyyMMdd-HHmmss}";
 
-        public const char StrokeDelimiter = '\n';
-        public const char PointDelimiter = ';';
-        public const char ElementDelimiter = ',';
+        public const string StrokeDelimiter = "\n";
+        public const string PointDelimiter = ";";
+        public const string ElementDelimiter = ",";
 
         static string ToString(StrokeCollection strokes) =>
-            string.Join(StrokeDelimiter.ToString(), strokes.Select(ToString));
+            string.Join(StrokeDelimiter, strokes.Select(ToString));
 
         static string ToString(Stroke stroke) =>
-            string.Join(PointDelimiter.ToString(), stroke.StylusPoints.Select(p => ((Point)p) * TransformToDevice.Value).Select(ToString));
+            string.Join(PointDelimiter, stroke.StylusPoints.Select(p => ((Point)p) * TransformToDevice.Value).Select(ToString));
 
         static string ToString(Point p) =>
             $"{p.X:F0}{ElementDelimiter}{p.Y:F0}";
