@@ -82,13 +82,21 @@ namespace InkStrokes
             string.Join(StrokeDelimiter, strokes.Select(ToString));
 
         static string ToString(Stroke stroke) =>
-            string.Join(PointDelimiter, stroke.StylusPoints.Select(p => ((Point)p) * TransformToDevice.Value).Select(ToString));
+            string.Join(PointDelimiter, ToPoints(stroke).Select(ToString));
 
         static string ToString(Point p) =>
             $"{p.X:F0}{ElementDelimiter}{p.Y:F0}";
 
         static string ToString(StylusPoint p) =>
-            $"{p.X:F3}{ElementDelimiter}{p.Y:F3}";
-        //$"{p.X:F3}{ElementDelimiter}{p.Y:F3}{ElementDelimiter}{p.PressureFactor:F3}";
+            $"{p.X:F3}{ElementDelimiter}{p.Y:F3}{ElementDelimiter}{p.PressureFactor:F3}";
+
+        static IEnumerable<Point> ToPoints(Stroke stroke) =>
+            stroke.StylusPoints
+                .Select(p => ((Point)p) * TransformToDevice.Value)
+                .Select(Round)
+                .DistinctConsecutively();
+
+        static Point Round(Point p) =>
+            new Point(Math.Round(p.X, MidpointRounding.AwayFromZero), Math.Round(p.Y, MidpointRounding.AwayFromZero));
     }
 }
