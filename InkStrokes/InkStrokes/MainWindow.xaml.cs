@@ -67,6 +67,7 @@ namespace InkStrokes
             var bitmap = BitmapUtility.CreateImage(TheInkCanvas);
             BitmapUtility.SaveImage(imagePath, bitmap);
 
+            // Tracks at 100 points/s.
             var data = ToString(TheInkCanvas.Strokes);
             File.WriteAllText(dataPath, data);
         }
