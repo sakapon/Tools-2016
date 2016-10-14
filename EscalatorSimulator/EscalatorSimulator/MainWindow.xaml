@@ -1,0 +1,59 @@
+﻿<Window x:Class="EscalatorSimulator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EscalatorSimulator"
+        mc:Ignorable="d"
+        Title="Escalator Simulator" Height="600" Width="900" FontSize="24" WindowState="Maximized">
+    <Window.Resources>
+        <Style x:Key="CircleStyle" TargetType="{x:Type Ellipse}">
+            <Setter Property="Fill" Value="#FFFF9900"/>
+            <Setter Property="Width" Value="{x:Static local:AppSettings.CircleRadius}"/>
+            <Setter Property="Height" Value="{x:Static local:AppSettings.CircleRadius}"/>
+            <Setter Property="Canvas.Top" Value="350"/>
+        </Style>
+        <ItemsPanelTemplate x:Key="EscalatorsPanelTemplate">
+            <UniformGrid Rows="1"/>
+        </ItemsPanelTemplate>
+        <DataTemplate x:Key="EscalatorDataTemplate">
+            <DockPanel Margin="20" Loaded="EscalatorPanel_Loaded">
+                <Grid DockPanel.Dock="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding People2.Value}" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+                    <TextBlock Text="{Binding People2_L.Value}" HorizontalAlignment="Center" Grid.Row="1"/>
+                    <TextBlock Text="{Binding People2_R.Value}" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
+                </Grid>
+                <Grid DockPanel.Dock="Bottom">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding People1_L.Value}" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding People1_R.Value}" HorizontalAlignment="Center" Grid.Column="1"/>
+                    <TextBlock Text="{Binding People1.Value}" HorizontalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2"/>
+                </Grid>
+                <Viewbox>
+                    <Canvas x:Name="TheCanvas" Height="380" Width="200"/>
+                </Viewbox>
+            </DockPanel>
+        </DataTemplate>
+    </Window.Resources>
+    <Window.DataContext>
+        <local:AppModel/>
+    </Window.DataContext>
+    <Grid>
+        <ItemsControl ItemsSource="{Binding Escalators}" ItemsPanel="{DynamicResource EscalatorsPanelTemplate}" ItemTemplate="{DynamicResource EscalatorDataTemplate}"/>
+    </Grid>
+</Window>
