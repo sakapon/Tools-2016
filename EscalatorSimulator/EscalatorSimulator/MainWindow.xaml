@@ -52,7 +52,7 @@
         <local:AppModel/>
     </Window.DataContext>
     <Viewbox>
-        <Grid Height="600" Width="900">
+        <Grid Height="570" Width="900">
             <ItemsControl ItemsSource="{Binding Escalators}" ItemsPanel="{DynamicResource EscalatorsPanelTemplate}" ItemTemplate="{DynamicResource EscalatorDataTemplate}"/>
         </Grid>
     </Viewbox>
