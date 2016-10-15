@@ -12,6 +12,11 @@ Intelli-RPS is a desktop app to play Rock-paper-scissors (RPS) with a little cle
 
 ![Intelli-RPS](Images/IntelliRps/11-15-22.png)
 
+## Escalator Simulator
+Escalator Simulator is a desktop app to simulate people's stopping or walking on escalators.
+
+![Escalator Simulator](Images/EscalatorSimulator/EscalatorSimulator-Play.gif)
+
 ## Thanks
 ### Images
 - [無料イラスト素材集ほらぱれっと](http://illust-hp.com/)
