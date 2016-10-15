@@ -11,7 +11,7 @@
             <Setter Property="Fill" Value="#FFFF9900"/>
             <Setter Property="Width" Value="{x:Static local:AppSettings.CircleRadius}"/>
             <Setter Property="Height" Value="{x:Static local:AppSettings.CircleRadius}"/>
-            <Setter Property="Canvas.Top" Value="350"/>
+            <Setter Property="Canvas.Top" Value="360"/>
         </Style>
         <ItemsPanelTemplate x:Key="EscalatorsPanelTemplate">
             <UniformGrid Rows="1"/>
@@ -44,16 +44,16 @@
                     <TextBlock Text="{Binding People1_R.Value}" HorizontalAlignment="Center" Grid.Column="1"/>
                     <TextBlock Text="{Binding People1.Value}" HorizontalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2"/>
                 </Grid>
-                <Viewbox>
-                    <Canvas x:Name="TheCanvas" Height="380" Width="200"/>
-                </Viewbox>
+                <Canvas x:Name="TheCanvas"/>
             </DockPanel>
         </DataTemplate>
     </Window.Resources>
     <Window.DataContext>
         <local:AppModel/>
     </Window.DataContext>
-    <Grid>
-        <ItemsControl ItemsSource="{Binding Escalators}" ItemsPanel="{DynamicResource EscalatorsPanelTemplate}" ItemTemplate="{DynamicResource EscalatorDataTemplate}"/>
-    </Grid>
+    <Viewbox>
+        <Grid Height="570" Width="900">
+            <ItemsControl ItemsSource="{Binding Escalators}" ItemsPanel="{DynamicResource EscalatorsPanelTemplate}" ItemTemplate="{DynamicResource EscalatorDataTemplate}"/>
+        </Grid>
+    </Viewbox>
 </Window>
