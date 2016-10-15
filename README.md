@@ -8,7 +8,8 @@ See [document](https://github.com/sakapon/Tools-2016/wiki/File-Splitter).
 
 ## Intelli-RPS for Leap Motion
 Intelli-RPS is a desktop app to play Rock-paper-scissors (RPS) with a little clever computer, using Leap Motion Controller.  
-[Download and install the app](https://sakapon.github.io/Tools/2016/IntelliRpsLeap/IntelliRpsLeap.application) by ClickOnce.
+[Download and install the app](https://sakapon.github.io/Tools/2016/IntelliRpsLeap/IntelliRpsLeap.application) by ClickOnce.  
+See [video on Vine](https://vine.co/v/5ZMOK2M1UHi).
 
 ![Intelli-RPS](Images/IntelliRps/11-15-22.png)
 
