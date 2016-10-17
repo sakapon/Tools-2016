@@ -19,7 +19,7 @@ Escalator Simulator is a desktop app to simulate people's stopping or walking on
 ![Escalator Simulator](Images/EscalatorSimulator/EscalatorSimulator-Play.gif)
 
 ## DTMF Pad
-DTMF Pad is a desktop app to sound [DTMF (Dual-Tone Multi-Frequency)](https://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling) signals, such as telephone keypad.
+DTMF Pad is a desktop app to sound [DTMF (Dual-Tone Multi-Frequency)](https://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling) signals, such as a telephone keypad.
 
 ![DTMF Pad](Images/DtmfPad/DtmfPad.png)
 
