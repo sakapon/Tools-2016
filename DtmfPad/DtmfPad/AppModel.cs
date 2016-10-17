@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 
 namespace DtmfPad
@@ -29,6 +30,7 @@ namespace DtmfPad
         }
     }
 
+    [DebuggerDisplay(@"\{{Id}\}")]
     public class DtmfSignal
     {
         public string Id { get; }
