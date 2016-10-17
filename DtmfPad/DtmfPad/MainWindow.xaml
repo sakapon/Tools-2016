@@ -13,7 +13,7 @@
         <DataTemplate x:Key="SignalDataTemplate">
             <Grid x:Name="SignalRoot" Width="100" Height="100" Loaded="SignalRoot_Loaded">
                 <Button x:Name="SignalButton" Content="{Binding Id}" Height="100" Style="{DynamicResource SignalButtonStyle}" Width="100" Click="SignalButton_Click" Cursor="Hand"/>
-                <MediaElement Source="{Binding FileUri, Mode=OneWay}" LoadedBehavior="Manual" Visibility="Hidden" Volume="1"/>
+                <MediaElement Source="{Binding FileUri}" LoadedBehavior="Manual" Visibility="Hidden" Volume="1"/>
                 <Rectangle Fill="#00FFFFFF" Height="100" Width="100" Visibility="Collapsed" IsHitTestVisible="False"/>
             </Grid>
         </DataTemplate>
