@@ -5,8 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DtmfPad"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="DTMF Pad" Height="840" Width="720">
+    <Window.Resources>
+        <ItemsPanelTemplate x:Key="SignalsPanelTemplate">
+            <UniformGrid Columns="3" Rows="4"/>
+        </ItemsPanelTemplate>
+        <DataTemplate x:Key="SignalDataTemplate">
+            <Grid x:Name="SignalRoot" Width="100" Height="100" Loaded="SignalRoot_Loaded">
+                <Button x:Name="SignalButton" Content="{Binding Id}" Height="100" Style="{DynamicResource SignalButtonStyle}" Width="100" Click="SignalButton_Click" Cursor="Hand"/>
+                <MediaElement Source="{Binding FileUri, Mode=OneWay}" LoadedBehavior="Manual" Visibility="Hidden" Volume="1"/>
+                <Rectangle Fill="#00FFFFFF" Height="100" Width="100" Visibility="Collapsed" IsHitTestVisible="False"/>
+            </Grid>
+        </DataTemplate>
+        <Style x:Key="SignalButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle Width="100" VerticalAlignment="Top" Height="100" HorizontalAlignment="Left" Fill="#FFEECCAA"/>
+                            <ContentPresenter HorizontalAlignment="Center" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="48"/>
+        </Style>
+    </Window.Resources>
+    <Window.DataContext>
+        <local:AppModel/>
+    </Window.DataContext>
+    <Viewbox>
+        <Canvas Height="640" Width="540">
+            <Border Height="440" Width="330" Canvas.Left="100" Canvas.Top="100" BorderBrush="#FFAA8866" BorderThickness="2">
+                <ItemsControl ItemsSource="{Binding Signals}" ItemsPanel="{DynamicResource SignalsPanelTemplate}" ItemTemplate="{DynamicResource SignalDataTemplate}"/>
+            </Border>
+        </Canvas>
+    </Viewbox>
 </Window>
