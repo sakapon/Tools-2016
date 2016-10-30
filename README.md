@@ -15,6 +15,7 @@ See [video on Vine](https://vine.co/v/5ZMOK2M1UHi).
 
 ## Escalator Simulator
 Escalator Simulator is a desktop app to simulate people's stopping or walking on escalators.
+See [video on YouTube](https://www.youtube.com/watch?v=Z5gYF_W0F6k).
 
 ![Escalator Simulator](Images/EscalatorSimulator/EscalatorSimulator-Play.gif)
 
