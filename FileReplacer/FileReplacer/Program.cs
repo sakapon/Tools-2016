@@ -25,11 +25,19 @@ namespace FileReplacer
                 return 102;
             }
 
-            var rootDir = new DirectoryInfo(dirPath);
+            try
+            {
+                var rootDir = new DirectoryInfo(dirPath);
 
-            DirectoryHelper.ReplaceDirectoryNames(rootDir, oldValue,newValue);
-            DirectoryHelper.ReplaceFileNames(rootDir, oldValue,newValue);
-            DirectoryHelper.ReplaceFileContents(rootDir, oldValue,newValue);
+                DirectoryHelper.ReplaceDirectoryNames(rootDir, oldValue, newValue);
+                DirectoryHelper.ReplaceFileNames(rootDir, oldValue, newValue);
+                DirectoryHelper.ReplaceFileContents(rootDir, oldValue, newValue);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return 100;
+            }
 
             return 0;
         }
