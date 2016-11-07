@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTest
 {
     [TestClass]
-    public class DirectoryHelper
+    public class DirectoryHelperTest
     {
         [TestMethod]
         public void TestMethod1()

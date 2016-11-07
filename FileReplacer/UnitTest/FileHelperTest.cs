@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTest
 {
     [TestClass]
-    public class FileHelper
+    public class FileHelperTest
     {
         [TestMethod]
         public void TestMethod1()

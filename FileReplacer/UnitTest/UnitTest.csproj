@@ -50,8 +50,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="DirectoryHelper.cs" />
-    <Compile Include="FileHelper.cs" />
+    <Compile Include="DirectoryHelperTest.cs" />
+    <Compile Include="FileHelperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
