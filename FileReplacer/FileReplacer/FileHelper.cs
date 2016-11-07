@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace FileReplacer
 {
@@ -9,7 +10,14 @@ namespace FileReplacer
     {
         public static void ReplaceContent(FileInfo file, string oldValue, string newValue)
         {
-            throw new NotImplementedException();
+            var encoding = Encoding.UTF8;
+
+            var oldContent = File.ReadAllText(file.FullName, encoding);
+            if (!oldContent.Contains(oldValue)) return;
+
+            var newContent = oldContent.Replace(oldValue, newValue);
+            File.WriteAllText(file.FullName, newContent, encoding);
+            Console.WriteLine($"Replaced content: {file.FullName}");
         }
     }
 }

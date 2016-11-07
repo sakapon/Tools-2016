@@ -9,17 +9,47 @@ namespace FileReplacer
     {
         public static void ReplaceDirectoryNames(DirectoryInfo rootDir, string oldValue, string newValue)
         {
-            throw new NotImplementedException();
+            var targetDirs = rootDir.EnumerateDirectories($"*{oldValue}*", SearchOption.AllDirectories)
+                .Reverse()
+                .ToArray();
+            foreach (var dir in targetDirs)
+            {
+                ReplaceDirectoryName(dir, oldValue, newValue);
+                Console.WriteLine($"Renamed directory: {dir.FullName}");
+            }
         }
 
         public static void ReplaceFileNames(DirectoryInfo rootDir, string oldValue, string newValue)
         {
-            throw new NotImplementedException();
+            var targetFiles = rootDir.EnumerateFiles($"*{oldValue}*", SearchOption.AllDirectories)
+                //.Reverse()
+                .ToArray();
+            foreach (var file in targetFiles)
+            {
+                ReplaceFileName(file, oldValue, newValue);
+                Console.WriteLine($"Renamed file: {file.FullName}");
+            }
         }
 
         public static void ReplaceFileContents(DirectoryInfo rootDir, string oldValue, string newValue)
         {
-            throw new NotImplementedException();
+            var files = rootDir.GetFiles("*", SearchOption.AllDirectories);
+            foreach (var file in files)
+            {
+                FileHelper.ReplaceContent(file, oldValue, newValue);
+            }
+        }
+
+        static void ReplaceDirectoryName(DirectoryInfo dir, string oldValue, string newValue)
+        {
+            var newPath = Path.Combine(dir.Parent.FullName, dir.Name.Replace(oldValue, newValue));
+            dir.MoveTo(newPath);
+        }
+
+        static void ReplaceFileName(FileInfo file, string oldValue, string newValue)
+        {
+            var newPath = Path.Combine(file.Directory.FullName, file.Name.Replace(oldValue, newValue));
+            file.MoveTo(newPath);
         }
     }
 }
