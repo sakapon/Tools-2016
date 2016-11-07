@@ -2,10 +2,6 @@
 
 The project to create tools.
 
-## File Splitter
-File Splitter is a command line tool to split the specified file, by specifying the maximum file size.  
-See [document](https://github.com/sakapon/Tools-2016/wiki/File-Splitter).
-
 ## Intelli-RPS for Leap Motion
 Intelli-RPS is a desktop app to play Rock-paper-scissors (RPS) with a little clever computer, using Leap Motion Controller.  
 [Download and install the app](https://sakapon.github.io/Tools/2016/IntelliRpsLeap/IntelliRpsLeap.application) by ClickOnce.  
@@ -23,6 +19,14 @@ See [video on YouTube](https://www.youtube.com/watch?v=Z5gYF_W0F6k).
 DTMF Pad is a desktop app to sound [DTMF (Dual-Tone Multi-Frequency)](https://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling) signals, such as a telephone keypad.
 
 ![DTMF Pad](Images/DtmfPad/DtmfPad.png)
+
+## File Splitter
+File Splitter is a command line tool to split the specified file, by specifying the maximum file size.  
+See [document](https://github.com/sakapon/Tools-2016/wiki/File-Splitter).
+
+## File Replacer
+File Replacer is a command line tool to replace names of files or directories, and replace text in files.
+See [document](https://github.com/sakapon/Tools-2016/wiki/File-Replacer).
 
 ## Thanks
 ### Images
