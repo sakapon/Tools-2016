@@ -8,11 +8,19 @@ namespace FileReplacer
 {
     public static class FileHelper
     {
+        public static readonly Encoding UTF8N = new UTF8Encoding();
+
         public static void ReplaceContent(FileInfo file, string oldValue, string newValue)
         {
-            var encoding = Encoding.UTF8;
+            string oldContent;
+            Encoding encoding;
 
-            var oldContent = File.ReadAllText(file.FullName, encoding);
+            using (var reader = new StreamReader(file.FullName, UTF8N, true))
+            {
+                oldContent = reader.ReadToEnd();
+                encoding = reader.CurrentEncoding;
+            }
+
             if (!oldContent.Contains(oldValue)) return;
 
             var newContent = oldContent.Replace(oldValue, newValue);
