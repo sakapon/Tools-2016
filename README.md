@@ -25,7 +25,7 @@ File Splitter is a command line tool to split the specified file, by specifying 
 See [document](https://github.com/sakapon/Tools-2016/wiki/File-Splitter).
 
 ## File Replacer
-File Replacer is a command line tool to replace names of files or directories, and replace text in files.
+File Replacer is a command line tool to replace names of files or directories, and replace text in files.  
 See [document](https://github.com/sakapon/Tools-2016/wiki/File-Replacer).
 
 ## Thanks
