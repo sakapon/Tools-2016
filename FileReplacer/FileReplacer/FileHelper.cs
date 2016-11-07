@@ -12,6 +12,8 @@ namespace FileReplacer
 
         public static void ReplaceContent(FileInfo file, string oldValue, string newValue)
         {
+            if (file.Attributes.HasFlag(FileAttributes.ReadOnly) || file.Attributes.HasFlag(FileAttributes.Hidden)) return;
+
             string oldContent;
             Encoding encoding;
 
