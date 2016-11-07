@@ -40,13 +40,13 @@ namespace FileReplacer
             }
         }
 
-        static void ReplaceDirectoryName(DirectoryInfo dir, string oldValue, string newValue)
+        internal static void ReplaceDirectoryName(DirectoryInfo dir, string oldValue, string newValue)
         {
             var newPath = Path.Combine(dir.Parent.FullName, dir.Name.Replace(oldValue, newValue));
             dir.MoveTo(newPath);
         }
 
-        static void ReplaceFileName(FileInfo file, string oldValue, string newValue)
+        internal static void ReplaceFileName(FileInfo file, string oldValue, string newValue)
         {
             var newPath = Path.Combine(file.Directory.FullName, file.Name.Replace(oldValue, newValue));
             file.MoveTo(newPath);
